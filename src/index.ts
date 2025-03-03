@@ -9,7 +9,7 @@ import path from "node:path";
  * 
  */
 export interface SingleExample<ARGS extends Array<any>, R> {
-    args:ARGS,
+    input:ARGS,
     output:R
 }
 
@@ -91,16 +91,16 @@ function compareValues<T extends unknown>(lhs:T, rhs:T):void {
  * @param {SingleExample} example 
  */
 async function HandleExample<A extends Array<any>, R>(fun:(...args:A)=>Promise<R>|R, example:SingleExample<A,R>):Promise<void> {
-    const {args, output} = example;
+    const {input, output} = example;
 
-    if(!Array.isArray(args))
+    if(!Array.isArray(input))
         throw new TypeError("Args must be an array!");
 
     const start = Date.now();
     let time:number|undefined;
 
     try {
-        const result:R = await fun(...args);
+        const result:R = await fun(...input);
         time = Date.now() - start;
         compareValues(output, result);
         console.log(`SUCCESS! (${time!}ms)`);
