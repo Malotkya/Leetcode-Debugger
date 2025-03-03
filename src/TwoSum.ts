@@ -10,7 +10,7 @@ const Examples:MultipleExamples<[
 ], number[]> = [
     //Example 1
     {
-        args: [
+        input: [
             [2,7,11,15],
             9,
         ],
@@ -19,7 +19,7 @@ const Examples:MultipleExamples<[
 
     //Example 2
     {
-        args: [
+        input: [
             [3,2,4],
             6,
         ],
@@ -28,7 +28,7 @@ const Examples:MultipleExamples<[
 
     //Example 3
     {
-        args: [
+        input: [
             [3,3],
             6,
         ],

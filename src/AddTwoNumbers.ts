@@ -21,7 +21,7 @@ const Examples:MultipleExamples<[
 ], ListNode|null> = [
     //Example 1
     {
-        args: [
+        input: [
             new ListNode(2, new ListNode(4, new ListNode(3))),
             new ListNode(5, new ListNode(6, new ListNode(4)))
         ],
@@ -30,7 +30,7 @@ const Examples:MultipleExamples<[
 
     //Example 2
     {
-        args: [
+        input: [
             new ListNode(),
             new ListNode()
         ],
@@ -39,7 +39,7 @@ const Examples:MultipleExamples<[
 
     //Example 3
     {
-        args: [
+        input: [
             new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9))))))),
             new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9)))),
         ],
@@ -47,27 +47,27 @@ const Examples:MultipleExamples<[
     }
 ]
 
-function addTwoNumbers(l1: ListNode | null, l2: ListNode | null, carry:number = 0): ListNode | null {
-    if(l1 === null || l2 === null){
-        if(l1) {
-            const sum = l1.val + carry;
-            return new ListNode(sum % 10, addTwoNumbers(l1.next, null, sum > 9? 1: 0));
-        }
+function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): ListNode | null {
+    const head = new ListNode();
+    let curr = head;
+    let carry = 0;
 
-        if(l2) {
-            const sum = l2.val + carry;
-            return new ListNode(sum % 10, addTwoNumbers(l2.next, null, sum > 9? 1: 0))
-        }
+    while(l1 !== null || l2 !== null || carry !== 0) {
+        const sum = (l1 !== null ? l1.val : 0)
+                  + (l2 !== null ? l2.val : 0)
+                  + carry;
 
-        if(carry === 1)
-            return new ListNode(1);
+        carry = sum > 9? 1: 0;
+        curr.next = new ListNode(sum % 10);
+        curr = curr.next;
 
-        return null;
+        if (l1 !== null)
+            l1 = l1.next;
+        if (l2 !== null)
+            l2 = l2.next;
     }
 
-    const sum = l1.val + l2.val + carry;
-    return new ListNode(sum % 10, addTwoNumbers(l1.next, l2.next, sum > 9? 1: 0))
+    return head.next;
 };
-
 
 export default RunTests(addTwoNumbers, Examples);
