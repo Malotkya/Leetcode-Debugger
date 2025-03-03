@@ -94,7 +94,7 @@ async function HandleExample<A extends Array<any>, R>(fun:(...args:A)=>Promise<R
     const {input, output} = example;
 
     if(!Array.isArray(input))
-        throw new TypeError("Args must be an array!");
+        throw new TypeError("Input must be an array!");
 
     const start = Date.now();
     let time:number|undefined;
