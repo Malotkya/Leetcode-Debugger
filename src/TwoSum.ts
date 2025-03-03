@@ -1,5 +1,6 @@
 /** TwoSum
  * 
+ * @author Alex Malotky
  */
 import {MultipleExamples, RunTests} from ".";
 
